@@ -36,7 +36,7 @@ def update_Ymd():
 # 년월일을 가져와 업데이트 하는 함수
 
 def update_weather():
-    html = requests.get('https://search.naver.com/search.naver?query=부산강서구날씨')
+    html = requests.get('https://search.naver.com/search.naver?query=부산강서구가락동날씨')
     #html 주소를 가져온다
     soup = bs(html.text,'html.parser')
     # 주소로들어간 싸이트를 파싱한다
@@ -48,7 +48,8 @@ def update_weather():
     data3=data3[:data3.find('<')]+"°"
     # }
     weather_tem_label.config(text=data3)
-    weather_tem_label.after(1000, update_weather)
+    weather_tem_label.after(600000, update_weather)
+    # 10분 마다 업데이트 한다
     
     
 # 날씨를 실시간을 얻어 온다
@@ -96,7 +97,7 @@ if __name__=="__main__":
     root.btn_inactive = ImageTk.PhotoImage(btn_inactive)
     root.weather_icon = ImageTk.PhotoImage(weather_icon)
     # 이미지를 모듈로 만들어 준다
-    
+    waether_posion_label = Label(root, font=('NanumGothic', 20), text='부산광역시 강서구 가락동',fg="white", bg="#1b1b1b")
     time_label = Label(root, font=('NanumGothic', 30), fg="white", bg="#1b1b1b")
     Yemd_label = Label(root, font=('NaumGothic',20), fg="white", bg="#1b1b1b")
     weather_icon_label = Label(root, image=root.weather_icon, bg="#1b1b1b", borderwidth=0, highlightthickness=0)
@@ -106,9 +107,10 @@ if __name__=="__main__":
     
     canvas.create_window(130, 100, window=time_label)
     canvas.create_window(170, 50, window=Yemd_label)
-    canvas.create_window(250, 215, window=weather_tem_label) 
+    canvas.create_window(250, 220, window=weather_tem_label) 
     canvas.create_window(130, 200, window=weather_icon_label)
     canvas.create_window(540, 750, window=button)
+    canvas.create_window(330, 170, window=waether_posion_label)
     # gui 에 추한다
     root.geometry("1080x1920")
     # 화면 크기를 지정한다
