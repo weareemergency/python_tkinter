@@ -7,7 +7,7 @@
     프로젝트 싸이트:https://juniper-jumbo-de1.notion.site/python-52d9227c31c340249c001f0698a77eac
     설명:
     python tkinter 을 사용해서 의료용스마트 미러 
-    mian화면 gui를 만드는 코드 이다.
+    main화면 gui를 만드는 코드 이다.
 """
 
 from tkinter import *
@@ -17,7 +17,9 @@ from datetime import datetime
 from bs4 import BeautifulSoup as bs
 from pprint import pprint
 import requests
-
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
+NavigationToolbar2Tk)
 
 def on_enter(event):
     button.config(image=root.btn_active)
@@ -50,6 +52,20 @@ def update_weather():
     weather_tem_label.config(text=data3)
     weather_tem_label.after(600000, update_weather)
     # 10분 마다 업데이트 한다
+    
+    
+def plot():
+    fig = Figure(figsize = (1, 1), dpi = 100)
+  
+    y = [10, 40, 60, 80, 10, 90]
+  
+    plot1 = fig.add_subplot(111)
+    plot1.plot(y, zorder=50)
+    plot1.axis('off')
+    garap_show = FigureCanvasTkAgg(fig, master=canvas)  
+    garap_show.draw()
+    #canvas.create_window(100, 100, window=garap_show)
+    garap_show.get_tk_widget().place(x=40,y=1000)
     
     
 # 날씨를 실시간을 얻어 온다
@@ -86,7 +102,10 @@ if __name__=="__main__":
     # gui화면 설정 배경 bg="색갈입력" 현재 #1b1b1b 설정됨
     canvas.pack(fill=BOTH, expand=TRUE)
 
-    btn_inactive = Image.open("img/mainwindow.png")
+    ract_img = Image.open("img/ract-1.png")
+    ract_img = ract_img.resize((500,260))
+    
+    btn_inactive = Image.open("img/main2.png")
     btn_inactive = btn_inactive.resize((900, 260))
     # minwindow.png 이미지를 들고 온다
     # resize 를 사용하여 사진 크기를 조정한다
@@ -96,6 +115,7 @@ if __name__=="__main__":
 
     root.btn_inactive = ImageTk.PhotoImage(btn_inactive)
     root.weather_icon = ImageTk.PhotoImage(weather_icon)
+    root.ract_img = ImageTk.PhotoImage(ract_img)
     # 이미지를 모듈로 만들어 준다
     waether_posion_label = Label(root, font=('NanumGothic', 20), text='부산광역시 강서구 가락동',fg="white", bg="#1b1b1b")
     time_label = Label(root, font=('NanumGothic', 30), fg="white", bg="#1b1b1b")
@@ -103,7 +123,9 @@ if __name__=="__main__":
     weather_icon_label = Label(root, image=root.weather_icon, bg="#1b1b1b", borderwidth=0, highlightthickness=0)
     weather_tem_label = Label(root, font=('NanumGothic', 30), fg="white", bg="#1b1b1b")
     button = Button(root, image=root.btn_inactive, bg="#1b1b1b", width=900, height=260, borderwidth=0, highlightthickness=0)
+    ract_img_label = Button(root, image=root.ract_img, bg="#1b1b1b", width=500, height=260, borderwidth=0, highlightthickness=0)
     # label, Button 등을 설정한다
+    
     
     canvas.create_window(130, 100, window=time_label)
     canvas.create_window(170, 50, window=Yemd_label)
@@ -111,7 +133,11 @@ if __name__=="__main__":
     canvas.create_window(130, 200, window=weather_icon_label)
     canvas.create_window(540, 750, window=button)
     canvas.create_window(330, 170, window=waether_posion_label)
+    canvas.create_window(340, 1040, window=ract_img_label)
+    ract_img_label.lift()
     # gui 에 추한다
+    plot()
+    # 그래프 출력 함수
     root.geometry("1080x1920")
     # 화면 크기를 지정한다
     
