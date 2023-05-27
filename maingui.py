@@ -20,6 +20,8 @@ import requests
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
 NavigationToolbar2Tk)
+from scipy.interpolate import make_interp_spline
+import numpy as np
 
 def on_enter(event):
     button.config(image=root.btn_active)
@@ -52,21 +54,37 @@ def update_weather():
     weather_tem_label.config(text=data3)
     weather_tem_label.after(600000, update_weather)
     # 10분 마다 업데이트 한다
-    
-    
+
+# 글래프를 그리는 함수이다
 def plot():
-    fig = Figure(figsize = (1, 1), dpi = 100)
-  
-    y = [10, 40, 60, 80, 10, 90]
-  
-    plot1 = fig.add_subplot(111)
-    plot1.plot(y, zorder=50)
-    plot1.axis('off')
-    garap_show = FigureCanvasTkAgg(fig, master=canvas)  
-    garap_show.draw()
-    #canvas.create_window(100, 100, window=garap_show)
-    garap_show.get_tk_widget().place(x=40,y=1000)
+    fig = Figure(figsize = (5, 1),dpi = 100)
     
+    x=np.array([1,2,3,4,5,6,7])
+    y=np.array([100,100,100,100,10,10,50])
+    x2=np.array([1,2,3,4,5,6,7])
+    y2=np.array([0,0,0,100,50,50,50])
+    
+    model=make_interp_spline(x, y)
+    model2=make_interp_spline(x2, y2)
+    
+    xs=np.linspace(1,7,500)
+    ys=model(xs)
+    
+    xs2=np.linspace(1,7,500)
+    ys2=model2(xs2)
+    
+    plot1 = fig.add_subplot(111)
+    plot1.plot(xs, ys,zorder=50, color = 'green')
+    plot1.plot(xs2, ys2,zorder=50, color = 'blue')
+    plot1.axis('off')
+    # 그래프에서 축을 삭제한다
+    canvas = FigureCanvasTkAgg(fig, master=root)  
+    canvas.draw()
+    #canvas.create_window(100, 100, window=garap_show)
+    canvas.get_tk_widget().place(x=110,y=1040)
+    
+    #garap_show.get_tk_widget().lift()
+
     
 # 날씨를 실시간을 얻어 온다
 def startThread():
@@ -102,8 +120,17 @@ if __name__=="__main__":
     # gui화면 설정 배경 bg="색갈입력" 현재 #1b1b1b 설정됨
     canvas.pack(fill=BOTH, expand=TRUE)
 
+    ract_img2 = Image.open("img/Rectangle.png")
+    ract_img2 = ract_img2.resize((300, 260))
+    # Rectangle.png 이미지 가져와서 열기
+    
     ract_img = Image.open("img/ract-1.png")
-    ract_img = ract_img.resize((500,260))
+    ract_img = ract_img.resize((560,260))
+    # ract-1.png 이미지 가져와서 열기
+    
+    crow_img = Image.open("img/crow.png")
+    crow_img = crow_img.resize((70,70))
+    # crow.png 이미지를 가져와 열기 사이지 지정
     
     btn_inactive = Image.open("img/main2.png")
     btn_inactive = btn_inactive.resize((900, 260))
@@ -112,20 +139,45 @@ if __name__=="__main__":
     weather_icon = Image.open("img/sun-dynamic.png")
     weather_icon = weather_icon.resize((100,100))
     # 버튼 이미지 주소를 열어서 사진을 저장한다
-
+    list_Value = [10, 20, 30, 20, 40, 10]
+    
+    
     root.btn_inactive = ImageTk.PhotoImage(btn_inactive)
     root.weather_icon = ImageTk.PhotoImage(weather_icon)
     root.ract_img = ImageTk.PhotoImage(ract_img)
+    root.ract_img2 = ImageTk.PhotoImage(ract_img2)
+    root.crow_img  = ImageTk.PhotoImage(crow_img)
     # 이미지를 모듈로 만들어 준다
-    waether_posion_label = Label(root, font=('NanumGothic', 20), text='부산광역시 강서구 가락동',fg="white", bg="#1b1b1b")
-    time_label = Label(root, font=('NanumGothic', 30), fg="white", bg="#1b1b1b")
-    Yemd_label = Label(root, font=('NaumGothic',20), fg="white", bg="#1b1b1b")
-    weather_icon_label = Label(root, image=root.weather_icon, bg="#1b1b1b", borderwidth=0, highlightthickness=0)
-    weather_tem_label = Label(root, font=('NanumGothic', 30), fg="white", bg="#1b1b1b")
-    button = Button(root, image=root.btn_inactive, bg="#1b1b1b", width=900, height=260, borderwidth=0, highlightthickness=0)
-    ract_img_label = Button(root, image=root.ract_img, bg="#1b1b1b", width=500, height=260, borderwidth=0, highlightthickness=0)
-    # label, Button 등을 설정한다
     
+    
+    grap_result_label = Label(root, font=('NanumGothic', 27,'bold') ,text='자세 분석 결과:',fg="black", bg="white")
+    # "자세 분석 결과:" 문자를 출력하는 label 이다
+    grap_vare_label = Label(root, font=('NanumGothic', 20), text='전주 대비 향상 되었습니다!',fg="black", bg="white")
+    # "전주 대비 향상 되었습니다!" 등 결과를 문자로 출력하는 label 이다
+    waether_posion_label = Label(root, font=('NanumGothic', 20), text='부산광역시 강서구 가락동',fg="white", bg="#1b1b1b")
+    # "부산광역시 강서구 가락동"등 위치를 알려주는 문자이다
+    time_label = Label(root, font=('NanumGothic', 30), fg="white", bg="#1b1b1b")
+    # 시간에서 시:분 을 출력하는 label 이다
+    Yemd_label = Label(root, font=('NaumGothic',20), fg="white", bg="#1b1b1b")
+    # 년월일을 을 출력하는 label 이다
+    weather_icon_label = Label(root, image=root.weather_icon, bg="#1b1b1b", borderwidth=0, highlightthickness=0)
+    # 날씨 그림을 가져와 출력하는 label 이다
+    weather_tem_label = Label(root, font=('NanumGothic', 30), fg="white", bg="#1b1b1b")
+    # 날씨 온도를 출력하는 label 이다
+    button = Button(root, image=root.btn_inactive, bg="#1b1b1b", width=900, height=260, borderwidth=0, highlightthickness=0)
+    # 영상들을 추천하는 그림을 출력하는 button 이다
+    ract_img_label = Button(root, image=root.ract_img, bg="#1b1b1b", width=560, height=260, borderwidth=0, highlightthickness=0)
+    # 자세분석 결과 박스를 만드는 button 이다
+    ract2_img_label = Button(root, image=root.ract_img2, bg="#1b1b1b", width=300, height=260, borderwidth=0, highlightthickness=0)
+    # 투두 리스트 박스를 만드는 button 이다
+    crow_img_label = Label(root, image = root.crow_img, bg="white", borderwidth=0, highlightthickness=0)
+    # 랭크 화면의 이미지를 출력하는 label 이다
+    list_label = Label(root, font=('NanumGothic', 20, 'bold') ,text='현재 양유빈님이\n투두 1등 입니다',fg="black", bg="white")
+    # 1위 랭크를 출력하는 label 이다
+    list_rank_lable = Label(root, font=('NanumGothic', 17), text='2등 이지석님',fg="black", bg="white")
+    # 2등 랭크를 출력하는 label 이다
+    list_rank2_lable = Label(root, font=('NanumGothic', 17), text='3등 양성웅님',fg="black", bg="white")
+    plot()# 그래프 출력 함수
     
     canvas.create_window(130, 100, window=time_label)
     canvas.create_window(170, 50, window=Yemd_label)
@@ -133,11 +185,17 @@ if __name__=="__main__":
     canvas.create_window(130, 200, window=weather_icon_label)
     canvas.create_window(540, 750, window=button)
     canvas.create_window(330, 170, window=waether_posion_label)
-    canvas.create_window(340, 1040, window=ract_img_label)
-    ract_img_label.lift()
+    canvas.create_window(373, 1040, window=ract_img_label)
+    canvas.create_window(250, 960, window=grap_result_label)
+    canvas.create_window(285, 1000, window=grap_vare_label)
+    canvas.create_window(838, 1040, window=ract2_img_label)
+    canvas.create_window(740, 970, window=crow_img_label)
+    canvas.create_window(880,975, window=list_label)
+    canvas.create_window(840, 1070, window=list_rank_lable)
+    canvas.create_window(840, 1100, window=list_rank2_lable)
+    grap_result_label.lift()
+    grap_vare_label.lift()
     # gui 에 추한다
-    plot()
-    # 그래프 출력 함수
     root.geometry("1080x1920")
     # 화면 크기를 지정한다
     
