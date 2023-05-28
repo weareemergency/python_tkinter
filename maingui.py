@@ -210,6 +210,8 @@ if __name__=="__main__":
     # 3등 랭크를 출력하는 label 이다
     footer_img_lable = Label(root, image=root.footer_ra_img, bg="#1b1b1b", borderwidth=0, highlightthickness=0)
     # 하단쪽 그림을 출력하는 label 이다
+    health_check_button = Button(root, text="양유빈 님의 건상 상태를 확인하세요>",font=('NaumGothic',25),bg="#1b1b1b",fg="white",borderwidth=0, highlightthickness=0)
+    
     todo_button = Button(root, image=root.todo_img, bg="#535355", width=100, height=140, borderwidth=0, highlightthickness=0)
     hfile_button = Button(root, image=root.hfile_img, bg="#535355", width=100, height=140, borderwidth=0, highlightthickness=0)
     searcheck_button = Button(root, image=root.searcheck_img, bg="#535355", width=100, height=140, borderwidth=0, highlightthickness=0)
@@ -238,6 +240,7 @@ if __name__=="__main__":
     canvas.create_window(540, 1750, window=searcheck_button)
     canvas.create_window(675, 1750, window=aram_button)
     canvas.create_window(810, 1750, window=setting_button)
+    canvas.create_window(360, 590, window=health_check_button)
     grap_result_label.lift()
     grap_vare_label.lift()
     # gui 에 추한다
