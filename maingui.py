@@ -8,6 +8,8 @@
         - ract-1.png를 button 추가
         2023.05.15 이지석
         - gui 멈춤 문제 해결
+        2023.05.29 이지석
+        - grap, 하단바 구현
     }
     github: https://github.com/weareemergency/python_tkinter.git
     코드 다운방법
