@@ -1,6 +1,14 @@
 """
     2023-05-02 개발 시작
     코드 참여자 이지석, 양유빈
+    개발 로그{
+        2023.05.04 이지석
+        - 시간 가져오기 및 표시
+        2023.05.08 이지석
+        - ract-1.png를 button 추가
+        2023.05.15 이지석
+        - gui 멈춤 문제 해결
+    }
     github: https://github.com/weareemergency/python_tkinter.git
     코드 다운방법
     git clone https://github.com/weareemergency/python_tkinter.git
