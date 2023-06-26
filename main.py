@@ -4,19 +4,20 @@
         - main.py 모듈 제작
     }
     사용 label{  
-        grap_result_label   # "자세 분석 결과:" 문자를 출력하는 label 이다
-        grap_vare_label     # "전주 대비 향상 되었습니다!" 등 결과를 문자로 출력하는 label 이다
-        crow_img_label      # 랭크 화면의 이미지를 출력하는 label 이다
-        list_label          # 1위 랭크를 출력하는 label 이다
-        list_rank_lable     # 2등 랭크를 출력하는 label 이다
-        list_rank2_lable    # 3등 랭크를 출력하는 label 이다
+        grap_result_label   # "자세 분석 결과:" 문자를 출력
+        grap_vare_label     # "전주 대비 향상 되었습니다!" 등 결과를 문자로 출력
+        crow_img_label      # 랭크 화면의 이미지를 출력
+        list_label          # 1위 랭크를 출력
+        list_rank_lable     # 2등 랭크를 출력
+        list_rank2_lable    # 3등 랭크를 출력
     }
     button{
-        button              # 영상들을 추천하는 그림을 출력하는 button 이다
-        ract_img_button     # 자세분석 결과 박스를 만드는 button 이다
-        ract2_img_button    # 투두 리스트 박스를 만드는 button 이다
+        button              # 영상들을 추천하는 그림을 출력
+        ract_img_button     # 자세분석 결과 박스 출력
+        ract2_img_button    # 투두 리스트 박스 출력
     }
 """
+
 from tkinter import *
 import numpy as np
 from PIL import ImageTk, Image
@@ -28,10 +29,9 @@ NavigationToolbar2Tk)
 from scipy.interpolate import make_interp_spline
 
 class main_menu:
-    def __init__(self, canvas, root, Tk):
+    def __init__(self, canvas, root):
         self.canvas = canvas
         self.root = root
-        self.Tk = Tk
         self.write_main()
     def write_main(self):
         self.ract_img2 = Image.open("img/Rectangle.png")
@@ -52,6 +52,8 @@ class main_menu:
         self.root.ract_img2 = ImageTk.PhotoImage(self.ract_img2)
         self.root.crow_img  = ImageTk.PhotoImage(self.crow_img)
         # 이미지를 모듈로 만들어 준다
+        
+        self.health_check_button = Button(self.root, text="양유빈 님의 건강 상태를 확인하세요>",font=('NaumGothic',25),bg="#1b1b1b",fg="white",borderwidth=0, highlightthickness=0)
         
         self.grap_result_label = Label(self.root, font=('NanumGothic', 27,'bold') ,text='자세 분석 결과:',fg="black", bg="white")
         # "자세 분석 결과:" 문자를 출력하는 label 이다
@@ -81,6 +83,7 @@ class main_menu:
         self.canvas.create_window(880,975, window=self.list_label)
         self.canvas.create_window(840, 1070, window=self.list_rank_lable)
         self.canvas.create_window(840, 1100, window=self.list_rank2_lable)
+        self.canvas.create_window(360, 590, window=self.health_check_button)
         
         self.grap_result_label.lift()
         self.grap_vare_label.lift()

@@ -20,12 +20,11 @@ import requests
 from PIL import ImageTk, Image
 
 class Header_menu:
-    def __init__(self, canvas, root, Tk):
+    def __init__(self, canvas, root):
         self.canvas = canvas
         self.root = root
-        self.Tk = Tk
         self.write_header()
-        # write_header 함수를 실행하여 label을 출력한다
+        # write_header 함수를 실행하여 label, button을 출력한다
         
     def write_header(self):
         self.weather_icon = Image.open("img/sun-dynamic.png")
