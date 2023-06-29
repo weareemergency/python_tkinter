@@ -118,3 +118,14 @@ class main_menu:
         self.canvas = FigureCanvasTkAgg(fig, master=self.root)  
         self.canvas.draw()
         self.canvas.get_tk_widget().place(x=110,y=1040)
+    def clean_show(self):
+        self.button
+        self.ract_img_button.pack_forget()
+        self.grap_result_label.pack_forget()
+        self.grap_vare_label.pack_forget()
+        self.ract2_img_button.pack_forget()
+        self.crow_img_label.pack_forget()
+        self.list_label.pack_forget()
+        self.list_rank_lable.pack_forget()
+        self.list_rank2_lable.pack_forget()
+        self.health_check_button.pack_forget()

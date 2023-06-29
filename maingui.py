@@ -26,6 +26,9 @@ from tkinter import *
 import header
 import main
 import footer
+import start_main
+
+mode = 0
 
 if __name__=="__main__":
     root = Tk()#Tk 생성
@@ -36,12 +39,16 @@ if __name__=="__main__":
     
     root.geometry("1080x1920")
     # 화면 크기를 지정한다
-    
-    header.Header_menu(canvas, root)
+    if mode == 0:
+        header.Header_menu(canvas, root)
+        start_main.Menu_start(canvas, root, id(mode))
+    elif mode == 1:
+        main.main_menu(canvas, root)    
+        footer.footer_menu(canvas, root)
     # header.by 모듈을 불러 온다
-    main.main_menu(canvas, root)
+    
     # main.by 모듈을 불러 온다
-    footer.footer_menu(canvas, root)
+    
     # footer.by 모듈을 불러 온다
     
     # root.wm_attributes('-fullscreen', 'True') # gui 완성시 주석 삭제

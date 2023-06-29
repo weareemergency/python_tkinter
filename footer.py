@@ -4,10 +4,14 @@
         - footer.py 모듈 제작
     }
     사용 label{  
-        
+        footer_img_lable
     }
     button{
-        
+        todo_button
+        hfile_button
+        searcheck_button 
+        aram_button
+        setting_button
     }
 """
 
@@ -59,3 +63,11 @@ class footer_menu:
         self.canvas.create_window(540, 1750, window=self.searcheck_button)
         self.canvas.create_window(675, 1750, window=self.aram_button)
         self.canvas.create_window(810, 1750, window=self.setting_button)
+        
+    def clean_show(self):
+        self.footer_img_lable.pack_forget()
+        self.todo_button.pack_forget()
+        self.hfile_button.pack_forget()
+        self.searcheck_button.pack_forget()
+        self.aram_button.pack_forget()
+        self.setting_button.pack_forget()
