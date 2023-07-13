@@ -45,6 +45,7 @@ if __name__=="__main__":
     elif mode == 1:
         main.main_menu(canvas, root)    
         footer.footer_menu(canvas, root)
+    
     # header.by 모듈을 불러 온다
     
     # main.by 모듈을 불러 온다

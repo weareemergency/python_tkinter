@@ -118,6 +118,7 @@ class main_menu:
         self.canvas = FigureCanvasTkAgg(fig, master=self.root)  
         self.canvas.draw()
         self.canvas.get_tk_widget().place(x=110,y=1040)
+        
     def clean_show(self):
         self.button
         self.ract_img_button.pack_forget()
