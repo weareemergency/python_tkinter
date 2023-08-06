@@ -17,14 +17,20 @@
 
 from tkinter import *
 from PIL import ImageTk, Image
-
+import todo
+import main
 class footer_menu:
-    def __init__(self, canvas, root):
+    def __init__(self, canvas, root, call_main):
         self.canvas = canvas
         self.root = root
+        self.call_main = call_main
         self.write_footer()
         # write_header 함수를 실행하여 label, button을 출력한다
-    
+        
+    def todo_click(self):
+        self.call_main.clean_show()
+        self.tell_todo= todo.todo_list(self.canvas, self.root)
+        
     def write_footer(self):
         footer_ra_img = Image.open("img/footer_ract.png")
         todo_img = Image.open("img/todo.png")
@@ -51,7 +57,7 @@ class footer_menu:
         # 이미지를 모듈로 만들어 준다
         
         self.footer_img_lable = Label(self.root, image=self.root.footer_ra_img, bg="#1b1b1b", borderwidth=0, highlightthickness=0)
-        self.todo_button = Button(self.root, image=self.root.todo_img, bg="#535355", width=100, height=140, borderwidth=0, highlightthickness=0)
+        self.todo_button = Button(self.root, image=self.root.todo_img, bg="#535355", width=100, height=140, borderwidth=0, highlightthickness=0, command=self.todo_click)
         self.hfile_button = Button(self.root, image=self.root.hfile_img, bg="#535355", width=100, height=140, borderwidth=0, highlightthickness=0)
         self.searcheck_button = Button(self.root, image=self.root.searcheck_img, bg="#535355", width=100, height=140, borderwidth=0, highlightthickness=0)
         self.aram_button = Button(self.root, image=self.root.aram_img, bg="#535355", width=100, height=140, borderwidth=0, highlightthickness=0)
