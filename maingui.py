@@ -28,7 +28,7 @@ import main
 import footer
 import start_main
 
-mode = 0
+mode = 1
 
 if __name__=="__main__":
     root = Tk()#Tk 생성
@@ -39,13 +39,8 @@ if __name__=="__main__":
     
     root.geometry("1080x1920")
     # 화면 크기를 지정한다
-    if mode == 0:
-        header.Header_menu(canvas, root)
-        start_main.Menu_start(canvas, root, id(mode))
-    elif mode == 1:
-        main.main_menu(canvas, root)    
-        footer.footer_menu(canvas, root)
-    
+    header.Header_menu(canvas, root)
+    start_main.Menu_start(canvas, root, mode)
     # header.by 모듈을 불러 온다
     
     # main.by 모듈을 불러 온다

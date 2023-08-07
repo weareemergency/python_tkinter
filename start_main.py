@@ -18,8 +18,8 @@ class Menu_start:
     def movepage(self):
         # 버튼 클릭시 star_button 을 삭제 한다
         self.canvas.delete(self.star_button_window)
-        self.mode=1
-        main.main_menu(self.canvas, self.root)    
-        footer.footer_menu(self.canvas, self.root)
+        self.mode=0
+        self.main_call=main.main_menu(self.canvas, self.root)    
+        footer.footer_menu(self.canvas, self.root,self.main_call)
     def clean(self):
         self.star_button.pack_forget()

@@ -35,7 +35,7 @@ class todo_list:
         self.date_list = Listbox(self.root, font=('NaumGothic',20),width=10, height=13, borderwidth=0,bg="white",highlightthickness=0)
         self.check_box = Listbox(self.root, font=('NaumGothic',20),width=2, height=14, borderwidth=0,bg="white",highlightthickness=0)
         
-        self.img_list = ScrolledText(root, width=10, height=26,borderwidth=0,highlightthickness=0)
+        self.img_list = ScrolledText(self.root, width=10, height=26,borderwidth=0,highlightthickness=0)
         
         self.ranking_Button = Button(self.root, text="랭킹 보러가기>",font=('NaumGothic',25),bg="#1b1b1b",fg="white",borderwidth=0, highlightthickness=0, justify="left")
         
