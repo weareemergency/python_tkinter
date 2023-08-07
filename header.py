@@ -8,6 +8,7 @@
         Yemd_label //년월일을 출력
         weather_icon_label //날씨 이미지 출력
         weather_tem_label //온도 출력
+        waether_posion_label //지역 표시
     }
 """
 
@@ -99,7 +100,22 @@ class Header_menu:
         data3=str(data2[0])
         data3= data3[data3.find('</span>')+7:]
         data3=data3[:data3.find('<')]+"°"
+        
+        icon_data =soup.find('div',{'class':'weather_main'})
+        icon_data2 = icon_data.findAll('i')
+        icon_data3 = str(icon_data2)
+        icon_data3=icon_data3[icon_data3.find('i class')+9:]
+        icon_data3=icon_data3[:icon_data3.find('"')]+".png"
+        #print(icon_data3)
         # }
+        
+        self.weather_icon = Image.open("img/weather_img/"+icon_data3)
+        self.weather_icon = self.weather_icon.resize((100,100))
+        # 버튼 이미지를 열어서 가져온다
+
+        self.root.weather_icon = ImageTk.PhotoImage(self.weather_icon)
+        
+        self.weather_icon_label.config(image=self.root.weather_icon)
         self.weather_tem_label.config(text=data3)
         self.weather_tem_label.after(600000, self.update_weather)
         # 10분 마다 업데이트 한다

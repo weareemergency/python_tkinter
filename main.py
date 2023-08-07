@@ -33,6 +33,7 @@ class main_menu:
         self.canvas = canvas
         self.root = root
         self.write_main()
+        
     def write_main(self):
         self.ract_img2 = Image.open("img/Rectangle.png")
         self.ract_img2 = self.ract_img2.resize((300, 260))
@@ -89,7 +90,7 @@ class main_menu:
         self.grap_vare_label.lift()
         
         self.plot()
-        # 그래프를 버튼 위로 이동 한다
+        
     def plot(self):
         # 그래프를 그리는 함수이다
         fig = Figure(figsize = (5, 1),dpi = 100)
@@ -120,7 +121,22 @@ class main_menu:
         self.canvas.get_tk_widget().place(x=110,y=1040)
         
     def clean_show(self):
-        self.button
+        # 위젯을 pack으로 전부 생성 한다
+        self.button.pack()
+        self.button.pack_forget()
+        self.ract_img_button.pack()
+        self.grap_result_label.pack()
+        self.grap_vare_label.pack()
+        self.ract2_img_button.pack()
+        self.crow_img_label.pack()
+        self.list_label.pack()
+        self.list_rank_lable.pack()
+        self.list_rank2_lable.pack()
+        self.health_check_button.pack()
+        self.canvas.get_tk_widget().place()
+        self.canvas.get_tk_widget().place_forget()
+        
+        #생성한 위젯을 hide 를 한다
         self.ract_img_button.pack_forget()
         self.grap_result_label.pack_forget()
         self.grap_vare_label.pack_forget()
@@ -130,3 +146,4 @@ class main_menu:
         self.list_rank_lable.pack_forget()
         self.list_rank2_lable.pack_forget()
         self.health_check_button.pack_forget()
+        print('clean')
