@@ -1,3 +1,26 @@
+"""
+    개발 log{
+        2023.08.9 이지석
+        - ranking.py 모듈 제작
+        .......
+    }
+    사용 label{
+        rank_label
+        rank_icon
+        ract_image
+        date_rank 
+        line_image 
+        people_fi
+        people_se
+        people_th 
+        rank_label1 
+        rank_label2 
+        rank_label3 
+    }
+    사용 listbox{
+        list_rank
+    }
+"""
 from tkinter import *
 from tkinter import ttk
 from pprint import pprint
