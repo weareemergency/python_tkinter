@@ -67,7 +67,7 @@ class rank_list:
         self.list_rank.insert(END, '')
         self.list_rank.insert(END, '.')
         self.list_rank.insert(END, '')
-        
+        self.list_rank.bindtags((self.list_rank, self.root, "all"))
         self.canvas.create_window(800, 1030, window=self.list_rank)
         self.canvas.create_window(200, 850, window=self.people_fi)
         self.canvas.create_window(200, 1031, window=self.people_se)
