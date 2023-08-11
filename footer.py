@@ -29,7 +29,7 @@ class footer_menu:
         
     def todo_click(self):
         self.call_main.clean_show()
-        self.tell_todo= todo.todo_list(self.canvas, self.root)
+        self.tell_todo = todo.todo_list(self.canvas, self.root)
         
     def write_footer(self):
         footer_ra_img = Image.open("img/footer_ract.png")
