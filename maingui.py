@@ -41,11 +41,6 @@ if __name__=="__main__":
     # 화면 크기를 지정한다
     header.Header_menu(canvas, root)
     start_main.Menu_start(canvas, root, mode)
-    # header.by 모듈을 불러 온다
-    
-    # main.by 모듈을 불러 온다
-    
-    # footer.by 모듈을 불러 온다
     
     # root.wm_attributes('-fullscreen', 'True') # gui 완성시 주석 삭제
     # 윈도우 상당 바를 없애고 풀스크린 설정 한다
